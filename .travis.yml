@@ -7,14 +7,6 @@ services:
 
 before_script:  pip install docker-compose
 
-install:
-  - pip install "futures; python_version < '3'"
-  - pip install $pyflakes
-  - if [[ $TRAVIS_PYTHON_VERSION = *-dev ]]; then
-     printf '\n\n    CONSTANT = ignore\n' >> $VIRTUAL_ENV/lib/python*/site-packages/pyflakes/checker.py;
-    fi
-  - $if_pylint pip install pylint
-  - pip install docutils
 
 script:
   - docker-compose run app sh -c "python manage.py test && flake8"
